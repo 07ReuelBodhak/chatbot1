@@ -1,0 +1,591 @@
+{
+    "intents": [
+        {
+            "tag": "Driving License",
+            "patterns": [
+                "tell me about driving License",
+                "driving licence",
+                "what document are required for driving license",
+                "information about driving license",
+                "enquiry about driving license",
+                "details about driving license",
+                "tell me more about driving license",
+                "Can you provide information on obtaining a Driving License?",
+                "What's the process for getting a Driving License?",
+                "I need details about applying for a Driving License.",
+                "How can I get a Driving License from your store?",
+                "Tell me about the requirements for a Driving License.",
+                "What documents do I need for a Driving License?",
+                "Explain the steps to apply for a Driving License.",
+                "I want to know about the Driving License application.",
+                "Share information on the Driving License procedure.",
+                "How do I go about getting a Driving License?"
+            ],
+            "responses": [
+                "1.Proof of age:(any 1)\n(birth certificate,Passport,school leaving certificate)\n2.Proof of Address(any 1):\n(Addhar Card,Passport,VoterID)\n3.Application Form(Form 4)\n4.Passport size photograph 3\n5.Driving school certificate(for transport vehicle licences)"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "Passport",
+            "patterns": [
+                "passport",
+                "information about passport",
+                "details about passport",
+                "give me more details about passport",
+                "information about passport",
+                "tell me about passport",
+                "please give me information about passport",
+                "tell me documents required for passport",
+                "passport",
+                "please give me information about passport",
+                "tell me documents required for passport",
+                "documents required for applying passport",
+                "What's the process for applying for a passport?",
+                "Can you guide me on getting a passport?",
+                "Provide information on obtaining a passport.",
+                "I'm interested in applying for a passport.",
+                "How can I get a passport from your store?",
+                "Tell me about the passportrd application procedure.",
+                "What documents are required for passport?",
+                "Explain the steps to apply for passport.",
+                "I want to know about the passport application process.",
+                "Share information on obtaining passport."
+            ],
+            "responses": [
+                "1.Proof of Identity (any 1):\n(Passport,VoterID,Birth Certificate)\n2.Proof of Address(any one)\n(Addhar Card,passport,Driving License)\n3.Date of Birth proof(any one)\n(Birth Certificate, School leaving certificate, PAN Card)\n4.Passport Size Photograph\n(Recent color photographs with a white background)\n6.Additional Document(if applicable)\n(Marriage certificate (for married applicants), Divorce decree (if divorced) Name change document (if applicable)\n7.10th and 12th marksheet"
+            ],
+            "context": [""]
+        },  
+        {
+            "tag": "Pan Card",
+            "patterns": [
+                "Pan Card",
+                "information about pan card",
+                "details about pan card",
+                "give me more details about pan card",
+                "information about pan card",
+                "tell me about pan card",
+                "please give me information about pan card",
+                "tell me documents required for pan card",
+                "PanCard",
+                "information about pancard",
+                "details about pancard",
+                "give me more details about pancard",
+                "information about pancard",
+                "tell me about pancard",
+                "please give me information about pan card",
+                "tell me documents required for pan card",
+                "documents required for applying pan card",
+                "What's the process for applying for a Pan Card?",
+                "Can you guide me on getting a Pan Card?",
+                "Provide information on obtaining a Pan Card.",
+                "I'm interested in applying for a Pan Card.",
+                "How can I get a Pan Card from your store?",
+                "Tell me about the Pan Card application procedure.",
+                "What documents are required for a Pan Card?",
+                "Explain the steps to apply for a Pan Card.",
+                "I want to know about the Pan Card application process.",
+                "Share information on obtaining a Pan Card."
+            ],
+            "responses": [
+                "1.Proof of Identity (any 1):\n(Passport,VoterID,Birth Certificate)\n2.Proof of Address(any one)\n(Addhar Card,passport,Driving License)\n3.Bank Statement\n4.Passport Size Photograph"
+            ],
+            "context": [""]
+        },        
+        {
+            "tag": "Caste Certificate",
+            "patterns": [
+                "Caste Certificate",
+                "information about Caste Certificate",
+                "details about Caste Certificate",
+                "give me more detils about Caste Certificate",
+                "information about Caste Certificate",
+                "tell me about Caste Certificate",
+                "please give me information about Caste Certificate",
+                "tell me documents required for Caste Certificate",
+                "documents required for applying Caste Certificate",
+                "all neccessary documents required for caste certificaete",
+                "How can I get a Caste Certificate?",
+                "Tell me about the Caste Certificate application process.",
+                "Provide information on obtaining a Caste Certificate.",
+                "I'm interested in applying for a Caste Certificate.",
+                "What's the procedure for a Caste Certificate at your store?",
+                "Explain the steps to apply for a Caste Certificate.",
+                "What documents are required for a Caste Certificate?",
+                "Can you guide me on getting a Caste Certificate?",
+                "I want to know about the Caste Certificate application procedure.",
+                "Share information on obtaining a Caste Certificate."
+            ],
+            "responses": [
+                "1. Proof of Identity (any one of them):\n(PAN Card,Passport)\n2.proof of Address(ane one of them):\n(Passport,Addhar card,voter ID) \n3.Proof of caste (any one of them)\n(Caste Certificate of Parent or relatives, Affidavit declaring the caste of the applicant)\n4.Income Certificate\n5.School or college Bonafide Certificate\n6.Passport Size Photograph\n7.Ration Card\n8.Affidavit(An affidavit affirming the caste, duly signed by a notary or executive magistrate)"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "Domicile Certificate",
+            "patterns": [
+                "domicile certificate",
+                "information about domicile certificate",
+                "details about Caste Certificate",
+                "give me more detils about domicile certificate",
+                "information about domicile certificate",
+                "tell me about domicile certificate",
+                "please give me information about domicile certificate",
+                "tell me documents required for domicile certificate",
+                "documents required for applying domicile certificate",
+                "How can I apply for a Domicile Certificate?",
+                "Tell me about the Domicile Certificate application process.",
+                "Provide information on obtaining a Domicile Certificate.",
+                "I'm interested in applying for a Domicile Certificate.",
+                "What's the procedure for a Domicile Certificate at your store?",
+                "Explain the steps to apply for a Domicile Certificate.",
+                "What documents are required for a Domicile Certificate?",
+                "Can you guide me on getting a Domicile Certificate?",
+                "I want to know about the Domicile Certificate application procedure.",
+                "Share information on obtaining a Domicile Certificate."
+            ],
+            "responses": [
+                "1.Proof of Identity (any 1):\n(Passport,VoterID,Birth Certificate)\n2.Proof of Address(any one)\n(Addhar Card,passport,Driving License)\n3.Other Document(any one):\n(Ration Card/water bill/electric bill)\n4.Age Proof(in case of minor)(any one):\n(school leaving certificate,bonafide certificate)\n5.Residence Proof(any one)\n(Residence Proof by Talathi, Residence Proof by Gram Sevak)\n6.Mandatory Document(self decleration)"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "Nationality",
+            "patterns": [
+                "nationality",
+                "information about nationality",
+                "details about nationality",
+                "give me more detils about nationality",
+                "information about nationality",
+                "tell me about nationality",
+                "please give me information about nationality",
+                "tell me documents required for nationality",
+                "documents required for applying nationality",
+                "How can I obtain Nationality?",
+                "Tell me about the Nationality application process.",
+                "Provide information on obtaining Nationality.",
+                "I'm interested in applying for Nationality.",
+                "What's the procedure for Nationality at your store?",
+                "Explain the steps to apply for Nationality.",
+                "What documents are required for Nationality?",
+                "Can you guide me on getting Nationality?",
+                "I want to know about the Nationality application procedure.",
+                "Share information on obtaining Nationality."
+            ],
+            "responses": [
+                "1.Proof of Identity (any 1):\n(Passport,VoterID,Birth Certificate)\n2.Proof of Address(any one)\n(Addhar Card,passport,Driving License)\n3.Other Document(any one):\n(Ration Card/water bill/electric bill)\n4.Age Proof(in case of minor)(any one):\n(school leaving certificate,bonafide certificate)\n5.Residence Proof(any one)\n(Residence Proof by Talathi, Residence Proof by Gram Sevak)\n6.Mandatory Document(self decleration)"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "Non-creamy Layer",
+            "patterns": [
+                "non creamy layer",
+                "information aboutnon creamy layer",
+                "details about non creamy layer",
+                "give me more detils aboutnon creamy layer",
+                "information aboutnon creamy layer",
+                "tell me aboutnon creamy layer",
+                "please give me information aboutnon creamy layer",
+                "tell me documents required fornon creamy layer",
+                "documents required for applyingnon creamy layer",
+                "How can I obtain non creamy layer",
+                "How can I apply for a Non-creamy Layer Certificate?",
+                "Tell me about the Non-creamy Layer Certificate application process.",
+                "Provide information on obtaining a Non-creamy Layer Certificate.",
+                "I'm interested in applying for a Non-creamy Layer Certificate.",
+                "What's the procedure for a Non-creamy Layer Certificate at your store?",
+                "Explain the steps to apply for a Non-creamy Layer Certificate.",
+                "What documents are required for a Non-creamy Layer Certificate?",
+                "Can you guide me on getting a Non-creamy Layer Certificate?",
+                "I want to know about the Non-creamy Layer Certificate application procedure.",
+                "Share information on obtaining a Non-creamy Layer Certificate."
+            ],
+            "responses": [
+                "1.Proof of identity(any 1):\n(Pan card,Passport,Addhar card)\n2.Proof of Address(any 1):\n(Passport, Addhar card,ration card, voter ID)\n3.Other Documet(any one):\n( Property tax receipt, Proof of caste of a relative, If proof of father's caste not available, a relative's caste certificate and genealogical affidavit with details of relation to relative)\n4.mandatory Documet(1.Income Proof,2.Affidavit for caste,3.proof of caste itself)"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "Income Certificate",
+            "patterns": [
+                "Income Certificate",
+                "information aboutIncome Certificate",
+                "details about Income Certificate",
+                "give me more detils aboutIncome Certificate",
+                "information aboutIncome Certificate",
+                "tell me aboutIncome Certificate",
+                "please give me information aboutIncome Certificate",
+                "tell me documents required forIncome Certificate",
+                "documents required for applyingIncome Certificate",
+                "How can I obtain Income Certificate",
+                "How can I apply for an Income Certificate?",
+                "Tell me about the Income Certificate application process.",
+                "Provide information on obtaining an Income Certificate.",
+                "I'm interested in applying for an Income Certificate.",
+                "What's the procedure for an Income Certificate at your store?",
+                "Explain the steps to apply for an Income Certificate.",
+                "What documents are required for an Income Certificate?",
+                "Can you guide me on getting an Income Certificate?",
+                "I want to know about the Income Certificate application procedure.",
+                "Share information on obtaining an Income Certificate."
+            ],
+            "responses": [
+                "Mandatory : Salary Statement for last 12 months from DDO (Government Employee) Or Certificate from BDO (For Rural areas) Or Certificate from DAO, DHO, DVO, etc (For persons having income from Agriculture, Horticulture and Veterinary Sources). (APST Non-Government Employee) Or IT Return/ Form 16 (Non APST Non-Government Employee)\nAge of Proof (any one):\n(Pan card, Birth Certificate,School Leaving Certificate) \nAddress Proof (any one):\n(Addhar card, voter ID, Ration Card),1.Proof of identity(any 1) : \n(Pan card,Passport,Addhar card)"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "greetings",
+            "patterns": [
+                "Hi",
+                "Hello",
+                "Hey",
+                "Greetings",
+                "Howdy",
+                "Hi there",
+                "What's up?",
+                "Yo",
+                "Hiya",
+                "Hey there",
+                "Sup?",
+                "Hola",
+                "How's it going?",
+                "What's happening?",
+                "Hiya there",
+                "Heya",
+                "Wassup?",
+                "Hihi",
+                "Aloha",
+                "How's tricks?",
+                "Salut",
+                "How's life?"
+            ],
+            "responses": [
+                "Hii, how can i help you !!!",
+                "Hello, What can i do for you?"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "goodbyes",
+            "patterns": [
+                "bye-bye",
+                "bye bro",
+                "Farewell",
+                "See you later",
+                "See ya",
+                "Catch you later",
+                "Take care",
+                "Later",
+                "So long",
+                "Bye-bye",
+                "Until we meet again",
+                "Peace out",
+                "Catch you later",
+                "See ya around",
+                "Take it easy!",
+                "Until next time",
+                "Farewell and take care",
+                "Goodbye and best wishes",
+                "Until we meet again, goodbye",
+                "Wishing you a pleasant day",
+                "goodbye"
+            ],
+            "responses": [
+                "Goodbye!!",
+                "see you again!!",
+                "nice to meet you, feel free to ask any question",
+                "Don't hesitate to reach out if you have any questions or need assistance"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "name",
+            "patterns": [
+                "May I know your name, please",
+                "What do you go by",
+                "Could you share your name with me",
+                "I'm curious, what's your name",
+                "Do you mind telling me your name",
+                "Could you introduce yourself with your name",
+                "What should I call you",
+                "May I ask the name you go by",
+                "Tell me, what's your name",
+                "I'd love to know your name, if you don't mind",
+                "What's the name you prefer",
+                "If you're comfortable, could you share your name",
+                "Mind sharing your name with me",
+                "What's the moniker you go by",
+                "Can I find out your name",
+                "your name",
+                "what is your name",
+                "tell me name",
+                "tell me your name"
+            ],
+            "responses": [
+                "As i am just asistance i dont have any name",
+                "the creator havent gave me a name",
+                "i dont have any name? if u have any other question please be free to ask"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "location",
+            "patterns": [
+                "Where is your cyber cafe located",
+                "location of your store",
+                "store location",
+                "please give me your store location",
+                "address",
+                "store address",
+                "what is your store address",
+                "give me address of the store",
+                "address of the store",
+                "location of the store",
+                "where is your store",
+                "what is the location of your store",
+                "your store location",
+                "where is your store located",
+                "what is the address of the cyber cafe",
+                "cyber cafe address"
+            ],
+            "responses": [
+                "sure!!,Akshay V. Pawar,MJ CYBER & SALES,Near Saint barnba complex,yeola road,manmad-423104",
+                "Akshay V. Pawar,MJ CYBER & SALES,Near Saint barnba complex,yeola road,manmad-423104, Feel free to swing by the store whenever you have the chance",
+                "Near Saint barnba complex,yeola road,manmad-423104",
+                "Here is the address, Near Saint barnba complex,yeola road,manmad-423104, We'll be delighted to see you!"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "store name",
+            "patterns": [
+                "What is the name of your store",
+                "Can you provide me with the name of the store you're talking about",
+                "How is your store called",
+                "What is the name of your cyber cafe",
+                "Can you provide me with the name of the cyber cafe you're referring to",
+                "How is your cyber cafe called",
+                "May I know the official name of the cyber cafe",
+                "What's the title of the cyber cafe you're associated with",
+                "Could you share the name of the cyber cafe where you work",
+                "Can you tell me the name of the establishment hosting the cyber cafe",
+                "What do you call the cyber cafe you operate",
+                "Could you let me know the name of the cyber cafe you mentioned",
+                "What's the name of the cyber cafe you are referring to",
+                "store name",
+                "name of the store",
+                "tell me your store name",
+                "tell me name of the store",
+                "name of your store",
+                "your store name",
+                "cyber cafe name",
+                "name of the cyber cafe",
+                "what is your store called",
+                "shop name",
+                "name of the shop",
+                "tell me your shop name",
+                "tell me name of the shop",
+                "name of your shop",
+                "your shop name",
+                "what is your shop called"
+            ],
+            "responses": [
+                "sure MJ CYBER & SALES",
+                "MJ CYBER & SALES",
+                "MJ CYBER & SALES i hope it's not hard to remeber"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "owner name",
+            "patterns": [
+                "whos store it is",
+                "owner of the store",
+                "are you the owner",
+                "name of the owner",
+                "name of the store owner",
+                "whos cuber cafe it is",
+                "name of the cyber cafe owner",
+                "whos cyber cafe it is",
+                "cyber cafe owner name",
+                "Can you tell me the name of the store owner",
+                "What is the name of the owner of the store",
+                "Could you share the owner's name for the store",
+                "May I know who owns the store",
+                "What's the name of the person who owns the store",
+                "Do you have information about the owner's name for the store",
+                "Could you let me know the owner's name for the store",
+                "Who is the owner of the store",
+                "Can you provide me with the name of the store owner",
+                "I'm curious about the owner's name for the store",
+                "tell me owner name",
+                "tell me name of the owner",
+                "what is the owner name",
+                "Are there options for expedited document creation services at your store?",
+                "who is store owner",
+                "store owner",
+                "store owner name"
+            ],
+            "responses": [
+                "Akshay V Pawar",
+                "Akshay V Pawar is the owner",
+                "the owner of the store is Akshay V Pawar"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "thankyou",
+            "patterns": [
+                "Thanks",
+                "Thank you",
+                "thanks a lot",
+                "ty",
+                "tysm",
+                "thank you so much",
+                "thanks a lot",
+                "thanks mate",
+                "hey thanks",
+                "hey thank you",
+                "thanks for the help",
+                "Thank you for your assistance",
+                "Thanks a bunch for your help",
+                "I appreciate your support, thank you",
+                "Thanks a million",
+                "Many thanks for your time and help",
+                "I'm grateful for your guidance, thank you",
+                "Thanks a ton",
+                "Thank you so much for your kind support",
+                "I truly appreciate your help, thank you",
+                "Thanks a bunch for being so helpful"
+            ],
+            "responses": [
+                "You're welcome!",
+                "I'm happy to help!",
+                "Feel free to ask if you need more assistance.",
+                "Glad I could assist you!",
+                "Anytime! Let me know if there's anything else I can do for you.",
+                "I'm here to help, so don't hesitate to ask.",
+                "Happy to be of service!",
+                "If you have any more questions, feel free to reach out.",
+                "It was my pleasure to assist you."
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "assistant information",
+            "patterns": [
+                "hey what are you",
+                "what is your job",
+                "what you do",
+                "what is your job here",
+                "why are you here",
+                "what you do her",
+                "your job",
+                "what is your work",
+                "your work"
+            ],
+            "responses": [
+                "I am here to assist and guide you",
+                "I am an assistant here to provide you with information and assistance about the shop"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "shop enquiry",
+            "patterns": [
+                "service of your shop",
+                "service of your store",
+                "your store services",
+                "shop services",
+                "store services",
+                "tell me about your shop",
+                "tell me about your cyber cafe",
+                "tell me about your store",
+                "information about your shop",
+                "information about your cyber cafe",
+                "what happens in your shop",
+                "describe your shop",
+                "can you explain your shop",
+                "give me details about your shop",
+                "what sets your shop apart",
+                "what makes your shop unique",
+                "how does your shop operate",
+                "tell me more about your business",
+                "what is special about your shop",
+                "what should I know about your shop",
+                "your shop information",
+                "your cyber cafe information"
+            ],
+            "responses": [
+                "1.Driving Licence\n2.Pan Card\n3.Passport\n4.Caste Certificate\n5.Domicile Certiificate\n6.Nationality Certificate\n7.Non-Creamy Layer Certificate\n8.Income Certificate\n9.Document print\n.for more feature pls contact us so we can provide you with more information"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "negative comment",
+            "patterns": [
+                "Hii i hate you",
+                "bad service",
+                "worst store",
+                "worst service",
+                "bad assistance",
+                "i hate your service",
+                "bad assistace",
+                "you are stupid",
+                "you are idiot",
+                "i dont like your assistance",
+                "i dont like your store",
+                "worst store",
+                "dont talk with me",
+                "i am mad",
+                "i am mad at service",
+                "service is bad",
+                "store is bad",
+                "fuck you",
+                "fuck off"
+            ],
+            "responses": [
+                "Sorry for any trouble caused, please be sure to leave feedback so we can do better",
+                "Apologies for any inconvenience, dont forget to leave a feedback so we can de more better",
+                "Extremely sorry for the confusion. please leave feedback so we can be able to do better",
+                "My sincere apologies for any inconvenience, please be sure to give us feedback on ur inconevience"
+            ],
+            "context": [
+                ""
+            ]
+        }
+    ]
+}

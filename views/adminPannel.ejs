@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Pannel</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/simplebar@5.3.0/dist/simplebar.min.css"
+    />
+  </head>
+
+  <body>
+    <style>
+      .text {
+        font-size: large;
+        font-weight: 400;
+        margin-left: 9px;
+        margin-top: 7px;
+        color: #9a9393;
+        transition: all 0.5s ease;
+      }
+      #newMessageCount {
+        background-color: #dc3545;
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 50%;
+        margin-left: 5px;
+        display: inline-block;
+      }
+      .user-box {
+        border: 1px solid #7bd3ea;
+        border-radius: 12px;
+        margin-right: 5em;
+        margin-left: 1em;
+        height: 290px;
+        width: 300px;
+      }
+
+      .pic-shadow {
+        width: 40px;
+        height: 40px;
+        transition: all 0.5s ease-out;
+        border: 1px solid #9a9393;
+      }
+
+      .subOrder-box {
+        border: 1px solid #7bd3ea;
+        border-radius: 12px;
+        margin-right: 3em;
+        height: 275px;
+        overflow: auto;
+      }
+
+      @media (max-width: 667px) {
+        .subOrder-box {
+          max-height: 250px;
+        }
+      }
+    </style>
+    <%- include('partial/adNavBar') %>
+    <div id="message-box"></div>
+    <div class="d-flex flex-wrap justify-content-center mt-4 p-2">
+      <div class="user-box p-1 mb-3" data-simplebar>
+        <div class="">
+          <%if(users == undefined){ %>
+          <div class="alert alert-danger mt-5">
+            <p class="text-center">user not found</p>
+          </div>
+          <% } else {%> <% for(i in users){ %>
+          <div class="d-flex">
+            <p class="text">Name: <%=users[i].name%></p>
+          </div>
+          <div class="d-flex">
+            <% const email = users[i].email %>
+            <p class="text">Email: <%=email%></p>
+          </div>
+          <div class="d-flex">
+            <p class="text">Date: <%=users[i].dateJoining.split(' at ')[0]%></p>
+          </div>
+          <div class="d-flex">
+            <p class="text">
+              Order :
+              <button
+                class="btn btn-primary btn-sm"
+                onclick="displayOrder('<%= users[i].email %>','<%= JSON.stringify(document) %>')"
+              >
+                show
+              </button>
+            </p>
+          </div>
+          <div class="d-flex justify-content-between px-2">
+            <% const targetEmail = users[i].email; const totalClientObjects =
+            messages.reduce((count, message) => { if (message.email ===
+            targetEmail) { return count + message.message.client.length; }
+            return count; }, 0); %>
+            <button
+              class="btn btn-danger btn-sm"
+              onclick="deleteOrder('<%=users[i].email %>')"
+            >
+              delete
+            </button>
+            <button
+              class="btn btn-primary btn-sm"
+              onclick="displayMessageBox('<%= users[i].email %>')"
+            >
+              message
+            </button>
+            <button
+              style="padding: 0; border: none; background: none"
+              onclick="displayMessage('<%= users[i].email %>')"
+            >
+              <img
+                src="<%= notificationPicture %>"
+                alt="Notification Picture"
+                class="rounded-circle py-1 pic-shadow"
+              />
+              <span id="newMessageCount"><%= totalClientObjects %></span>
+            </button>
+          </div>
+          <hr />
+          <% } %>
+        </div>
+        <% } %>
+      </div>
+      <div class="order-box mt-2" id="orderBox"></div>
+    </div>
+    <script>
+      function displayMessageBox(email) {
+        var ordrBox = document.getElementById("orderBox");
+        var ordrDiv = document.createElement("div");
+        orderBox.innerHTML = "";
+        ordrDiv.innerHTML = `
+      <div class="subOrder-box p-3 w-100">
+        <form>
+        <div class="form-group">
+        <p class="text"><label for="adminMessage"> type your Message : </label></p>
+        <textarea class="form-control" id="msg" rows="3"></textarea>
+        </div>
+        <button type="button" onclick="sendAdminMessage('${email}')" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      `;
+        orderBox.appendChild(ordrDiv);
+      }
+
+      function sendAdminMessage(email) {
+        const msgBox = document.getElementById("message-box");
+        const msgDiv = document.createElement("div");
+        const message = document.getElementById("msg").value;
+        const messageObject = {
+          email: email,
+          adminMessage: message,
+        };
+        document.getElementById("msg").value = "";
+        fetch("sendMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(messageObject),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((result) => {
+            if (result.success) {
+              msgDiv.innerHTML = `
+                    <div class="alert alert-success mt-5">
+                        message sent successfully
+                    </div>
+                `;
+            } else {
+              msgDiv.innerHTML = `
+                    <div class="alert alert-danger mt-5">
+                        Unable to send message
+                    </div>
+                `;
+            }
+            msgBox.appendChild(msgDiv);
+            setTimeout(() => {
+              msgBox.innerHTML = "";
+            }, 4000);
+          })
+          .catch((error) => {
+            console.error("Error during fetch:", error);
+            msgDiv.innerHTML = `
+                <div class="alert alert-danger mt-5">
+                    Error: ${error.message}
+                </div>
+            `;
+            msgBox.appendChild(msgDiv);
+
+            setTimeout(() => {
+              msgBox.innerHTML = "";
+            }, 90000);
+          });
+      }
+
+      function displayMessage(email) {
+        const messageObject = { email: email };
+
+        fetch("/messageInfo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(messageObject),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((result) => {
+            var clientMessage = result.clientMessages;
+            console.log(clientMessage.length);
+            var ordrBox = document.getElementById("orderBox");
+            var ordrDiv = document.createElement("div");
+            orderBox.innerHTML = "";
+            ordrDiv.innerHTML = `
+            <div class="subOrder-box p-2">
+            ${(() => {
+              content = "";
+              if (clientMessage.length !== 0) {
+                for (const [index, i] of clientMessage.entries()) {
+                  content += `
+                <div class='alert alert-primary'>
+                <p style="font-size : large;">Customer : ${i.clmsg}</p>
+                    <label for="msg">Reply :</label>
+                    <input type='text' class="form-control mt-2" id='msg${
+                      index + 1
+                    }' name="replyMessage">
+                    <button type="button" class="mt-2 btn btn-primary btn-sm" onclick="sendMessage('${
+                      i.clmsg
+                    }','${result.userEmail}','msg${
+                    index + 1
+                  }')">Send Reply</button>
+                <p class="mt-2" style="font-size : small;">${i.date}</p>
+                </div>
+                `;
+                }
+              } else {
+                content += `
+            <div class="alert alert-danger">
+                nothing here
+            </div>
+            `;
+              }
+              return content;
+            })()}
+            </div>
+            `;
+            ordrBox.appendChild(ordrDiv);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      function sendAdminMessage(email) {
+        const msgBox = document.getElementById("message-box");
+        const msgDiv = document.createElement("div");
+        const message = document.getElementById("msg").value;
+        const messageObject = {
+          email: email,
+          adminMessage: message,
+        };
+        document.getElementById("msg").value = "";
+        fetch("sendMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(messageObject),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((result) => {
+            if (result.success) {
+              msgDiv.innerHTML = `
+                            <div class="alert alert-success mt-5">
+                                message sent successfully
+                            </div>
+                        `;
+            } else {
+              msgDiv.innerHTML = `
+                            <div class="alert alert-danger mt-5">
+                                Unable to send message
+                            </div>
+                        `;
+            }
+            msgBox.appendChild(msgDiv);
+            setTimeout(() => {
+              msgBox.innerHTML = "";
+            }, 4000);
+          })
+          .catch((error) => {
+            console.error("Error during fetch:", error);
+            msgDiv.innerHTML = `
+                        <div class="alert alert-danger mt-5">
+                            Error: ${error.message}
+                        </div>
+                    `;
+            msgBox.appendChild(msgDiv);
+
+            setTimeout(() => {
+              msgBox.innerHTML = "";
+            }, 90000);
+          });
+      }
+
+      function sendMessage(msg, email, msgid) {
+        const msgBox = document.getElementById("message-box");
+        const msgDiv = document.createElement("div");
+        const message = document.getElementById(msgid).value;
+        const messageObject = {
+          clientMessage: msg,
+          email: email,
+          adminMessage: message,
+        };
+        document.getElementById(msgid).value = "";
+        fetch("sendMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(messageObject),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((result) => {
+            if (result.success) {
+              msgDiv.innerHTML = `
+                    <div class="alert alert-success mt-5">
+                        message sent succesfully
+                    </div>
+                `;
+            } else {
+              msgDiv.innerHTML = `
+                    <div class="alert alert-danger mt-5">
+                        Unable to send message
+                    </div>
+                `;
+            }
+            msgBox.appendChild(msgDiv);
+            setTimeout(() => {
+              msgBox.innerHTML = "";
+            }, 4000);
+          })
+          .catch((error) => {
+            console.error("Error during fetch:", error);
+            msgDiv.innerHTML = `
+                <div class="alert alert-danger mt-5">
+                    Error: ${error.message}
+                </div>
+            `;
+            msgBox.appendChild(msgDiv);
+
+            setTimeout(() => {
+              msgBox.innerHTML = "";
+            }, 900);
+          });
+      }
+
+      function displayOrder(email, userJson) {
+        var userObject = JSON.parse(userJson);
+        var ordrBox = document.getElementById("orderBox");
+        var ordrDiv = document.createElement("div");
+        orderBox.innerHTML = "";
+        const foundUser = userObject.find(function (user) {
+          return user.email === email;
+        });
+
+        ordrDiv.innerHTML = `
+            <div class="subOrder-box p-2">
+              ${(() => {
+                content = "";
+                let hasDocuments = false;
+                let documentName;
+                for (const key in foundUser.document) {
+                  const documents = foundUser.document[key];
+                  if (documents.length > 0) {
+                    hasDocuments = true;
+                    for (const i of documents) {
+                      documentName = i.documentName;
+                      content += `
+                          <hr>
+                          <p class='text'>Document Name : ${i.documentName}</p>
+                          <hr style="border: solid 2px  #7BD3EA">
+                          <p class='text'>Date : ${
+                            i.date ? new Date(i.date).toDateString() : "N/A"
+                          }</p>
+                          <hr style="border: solid 2px  #7BD3EA">
+                          `;
+                      counter = 0;
+                      for (const [index, j] of i.images.entries()) {
+                        counter++;
+                        content += `
+                              <button class='btn mt-2 btn-primary btn-sm' onclick='downloadImage("${
+                                j.fileid
+                              }","${documentName}","${email}"),${
+                          index + 1
+                        }'>image${counter} Download</button>
+                              `;
+                      }
+                    }
+                  }
+                }
+                if (!hasDocuments) {
+                  content += `
+                      <div class="alert alert-danger mt-5">
+                          No documents available
+                      </div>
+                  `;
+                }
+                return content;
+              })()}
+              </div>
+
+            `;
+        ordrBox.appendChild(ordrDiv);
+      }
+
+      // function downloadImage(id, dcname, email) {
+      //   const url = `http://127.0.0.1:5000/download/${id}`;
+      //   fetch(url)
+      //     .then((response) => {
+      //       if (!response.ok) {
+      //         throw new Error(`HTTP error! Status: ${response.status}`);
+      //       }
+      //       console.log(response);
+      //       return response.blob();
+      //     })
+      //     .then((blob) => {
+      //       console.log(blob);
+      //       const link = document.createElement("a");
+      //       link.href = URL.createObjectURL(blob);
+      //       link.download = `${dcname}_${id}.jpg`;
+      //       document.body.appendChild(link);
+      //       link.click();
+      //       document.body.removeChild(link);
+      //     })
+      //     .catch((error) => console.error("Error:", error));
+      // }
+
+      function downloadImage(id, dcname, email) {
+        const url = `http://localhost:3030/download/${id}`;
+        fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.blob();
+          })
+          .then((blob) => {
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `${dcname}_${id}.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function deleteOrder(email) {
+        const msgBox = document.getElementById("message-box");
+        const msgDiv = document.createElement("div");
+
+        msgBox.innerHTML = "";
+
+        fetch(`/deleteUser/${email}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((result) => {
+            if (result.success) {
+              msgDiv.innerHTML = `
+                    <div class="alert alert-success mt-5">
+                        User deleted successfully
+                    </div>
+                `;
+            } else {
+              msgDiv.innerHTML = `
+                    <div class="alert alert-danger mt-5">
+                        Unable to proceed with the deletion
+                    </div>
+                `;
+            }
+            msgBox.appendChild(msgDiv);
+
+            setTimeout(() => {
+              msgBox.innerHTML = "";
+            }, 4000);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            msgDiv.innerHTML = `
+                <div class="alert alert-danger mt-5">
+                    Error: ${error.message}
+                </div>
+            `;
+            msgBox.appendChild(msgDiv);
+
+            setTimeout(() => {
+              msgBox.innerHTML = "";
+            }, 90000);
+          });
+      }
+    </script>
+    <script src="https://unpkg.com/simplebar@5.3.0/dist/simplebar.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

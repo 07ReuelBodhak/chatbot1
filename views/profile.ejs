@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   
+    <style>
+        .pic-shadow{
+            width: 40px;
+            height: 40px;
+            transition: all 0.5s ease-out;
+            border: 1px solid #9a9393;
+        }
+
+        .button{
+            margin-left: 1em;
+            margin-top: 0.5em;
+        }
+
+        .profile-box{
+            border: 1px solid #7BD3EA;
+            border-radius: 12px;
+            margin-right: 5em;
+            margin-left: 1em;
+        }
+        .subOrder-box{
+            border: 1px solid #7BD3EA;
+            border-radius: 12px;
+            margin-right: 5em;
+            width: 360px;
+            height: 275px;
+            overflow: auto;
+        }
+        #newMessageCount {
+        background-color: #dc3545;
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 50%;
+        margin-left: 5px;
+        display: inline-block; 
+        }
+        .text{
+            font-size: large;
+            font-weight: 400;
+            margin-left: 9px;
+            margin-top: 7px;
+            color: #9a9393;
+            transition: all 0.5s ease;
+        }
+        @media (max-width: 767px) {
+    .profile-box, .subOrder-box {
+        margin-right: 1em; 
+        width: 350px;
+    }
+
+    .subOrder-box {
+        margin-right: 0; 
+    }
+}
+    </style>
+</head>
+
+<body>
+    <%- include('partial/navbarHead') %>
+        <li class="nav-item">
+            <% if(userEmail) { %>
+                <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+                <% } else { %>
+                    <a class="nav-link active" aria-current="page" href="/">Login</a>
+                    <% } %>
+        </li>
+        <% if(userEmail) { %>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#"> Wellcome <%= userName %></a>
+            </li>
+            <% } %>
+        <%- include('partial/navbarFoot') %>
+
+        <div class="d-flex flex-wrap justify-content-center mt-4 p-2">
+                <div class="profile-box p-2 mb-3">
+                    <div class="">
+                        <% if (profilePicture) { %>
+                            <div class="d-flex mt-2">
+                                <img src="<%= profilePicture %>" alt="Profile Picture" class="rounded-circle py-1 pic-shadow">
+                                <p class="text">Name: <%=userEmail.name%></p>
+                            </div>
+                        <% } %>
+                        <% if (emailPicture) { %>
+                            <div class="d-flex mt-2">
+                                <img src="<%= emailPicture %>" alt="Email Picture" class="rounded-circle py-1 pic-shadow">
+                                <p class="text">Email: <%=userEmail.email%></p>
+                            </div>
+                        <% } %>
+                        <% if (documentPicture) { %>
+                            <div class="d-flex mt-2">
+                                <img src="<%= documentPicture %>" alt="Document Picture" class="rounded-circle py-1 pic-shadow">
+                                <p class="text">Orders:</p>
+                                <div class="button" id="btn">
+                                    <label onclick="displayMessage()">click here see oders..</label>
+                                </div>
+                            </div>
+                        <% } %>
+                        <% if (datePicture) { %>
+                            <div class="d-flex mt-2">
+                                <img src="<%= datePicture %>" alt="Date Picture" class="rounded-circle py-1 pic-shadow">
+                                <p class="text">Date : <%=date%></p>
+                            </div>
+                        <% } %>
+                        <% if (messagePicture) { %>
+                            <div class="d-flex mt-2">
+                                <button style="padding: 0; border: none; background: none;" onclick="openMessageModel()">
+                                <img src="<%= messagePicture %>" alt="Date Picture" class="rounded-circle py-1 pic-shadow">
+                                <span id="newMessageCount"><%= msgCount %></span>
+                                </button>
+                                <p class="text">Message</p>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            <div class="display-box p-3 d-flex " id="displayBox">
+            </div>
+        </div>
+    <script>
+        
+    function displayMessage() {
+        var dispBx = document.getElementById('displayBox');
+        dispBx.innerHTML = '';
+        var dispBxDiv = document.createElement('div');
+        dispBxDiv.innerHTML = `
+        <div class="subOrder-box p-2">
+            ${(() => {
+                let content = '';
+                content += `
+                <% let hasOrders = false; %>
+                <% for (const [documentName, documentArray] of Object.entries(document)) { %>
+                    <% if (documentArray.length > 0) { %>
+                        <% hasOrders = true; %>
+                        <% for (const item of documentArray) { %>
+                        <div>
+                        <p class="text"> Document Name : <%= item.documentName %> </p>
+                        <p class="text"> Date : <%= item.date ? new Date(item.date).toDateString().split(' at ')[0] : 'N/A' %> </p>
+                        <hr>
+                        </div>
+                        <% } %>
+                        <% } %>
+                        <% } %>
+                        <% if (!hasOrders) { %>
+                        <button class='btn btn-danger'>You don't have any order</button>
+                        <% } %>
+                        `
+                return content;
+            })()}
+        </div>
+    `;
+         dispBx.appendChild(dispBxDiv);
+        }
+    
+    function openMessageModel(){
+        var dispBx = document.getElementById('displayBox');
+        dispBx.innerHTML = '';
+        var dispBxDiv = document.createElement('div');
+        dispBxDiv.innerHTML =`
+        <div class="subOrder-box p-2">
+            <% for (i of message)  {%>
+            <div class='alert alert-primary'>
+                <p style="font-size:medium;color: #9a9393;"><%= i.admsg %></p>
+                <p style="font-size:small;"><% const date = i.date ? i.date.split(' PM ')[0] : new Date().toISOString().split(' T ')[0] %><%= date %></p>
+            </div>
+            <% } %>
+        </div>
+        `
+        dispBx.appendChild(dispBxDiv);
+    }    
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

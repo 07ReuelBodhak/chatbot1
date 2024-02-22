@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <title>Chat Bot</title>
+  </head>
+  <body
+    style="
+      background-image: url('<%= BackgroundPicture %>');
+      background-size: cover;
+      background-repeat: no-repeat;
+    "
+  >
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      .chat-container {
+        height: 400px;
+        overflow-y: auto;
+      }
+
+      .chat-container1 {
+        width: 90%;
+        height: 500px;
+        background-color: #ffc0d9;
+        border-radius: 15px;
+        border: 3px solid #eee;
+      }
+
+      .chat-bubble {
+        border-radius: 25px;
+        padding: 10px 15px;
+        max-width: 70%;
+        word-wrap: break-word;
+        background-color: aliceblue;
+      }
+
+      .message-sender {
+        font-size: 0.9rem;
+        color: rgb(104, 104, 107);
+        margin-top: 5px;
+      }
+    </style>
+    <%- include('partial/navbarHead') %>
+    <li class="nav-item">
+      <% if(userEmail) {%>
+      <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+      <% }else{ %>
+      <a class="nav-link active" aria-current="page" href="/">Login</a>
+      <% } %>
+    </li>
+    <% if(userEmail){ %>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#"> Wellcome <%= userName%> </a>
+    </li>
+    <% }%> <%- include('partial/navbarFoot') %>
+    <div class="container py-4">
+      <h2>CHAT-BOT for Cyber Cafe</h2>
+      <div class="container-md chat-container1 mt-4 p-2">
+        <div class="container mt-2 px-4">
+          <div class="chat-container" id="chat-container"></div>
+          <div class="input-group mt-3 pl-2">
+            <input
+              type="text"
+              class="form-control"
+              id="user-input"
+              placeholder="Type your message here..."
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-primary"
+                type="button"
+                onclick="sendMessage()"
+              >
+                send
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function addMessage(message, sender) {
+        const chatContainer = document.getElementById("chat-container");
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+
+        const bubbleDiv = document.createElement("div");
+        bubbleDiv.classList.add("chat-bubble");
+
+        if (sender) {
+          const senderDiv = document.createElement("div");
+          senderDiv.classList.add("message-sender");
+          senderDiv.textContent = sender;
+
+          bubbleDiv.classList.add("text-black");
+          bubbleDiv.textContent = message;
+
+          messageDiv.appendChild(senderDiv);
+        } else {
+          bubbleDiv.classList.add("bg-light");
+          bubbleDiv.textContent = message;
+        }
+
+        messageDiv.appendChild(bubbleDiv);
+        chatContainer.appendChild(messageDiv);
+
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      function botMessage(message) {
+        var url = " http://localhost:3030/chat";
+
+        fetch(url, {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: message,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setTimeout(() => {
+              addMessage(data.response, "chat bot");
+            }, 500);
+          })
+          .catch((err) => console.log(err));
+      }
+
+      function sendMessage() {
+        const messageInput = document.getElementById("user-input");
+        const message = messageInput.value.trim();
+
+        if (message !== "") {
+          addMessage(message, "You :");
+          botMessage(message);
+          messageInput.value = "";
+        }
+      }
+
+      document
+        .getElementById("user-input")
+        .addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            sendMessage();
+          }
+        });
+    </script>
+  </body>
+</html>
