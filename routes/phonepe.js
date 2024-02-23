@@ -73,9 +73,9 @@ router.post("/payment", async (req, res, next) => {
       merchantTransactionId: tx_uuid,
       merchantUserId: "MUID123",
       amount: price * 100,
-      redirectUrl: "http://localhost:3030/pay/pay-return-url/",
+      redirectUrl: "https://chatbot1-0edo.onrender.com/pay/pay-return-url/",
       redirectMode: "POST",
-      callbackUrl: "http://localhost:3030/pay/pay-return-url/",
+      callbackUrl: "https://chatbot1-0edo.onrender.com/pay/pay-return-url/",
       mobileNumber: "9999999999",
       paymentInstrument: {
         type: "PAY_PAGE",
@@ -209,7 +209,7 @@ router.all("/pay-return-url", async (req, res, next) => {
               { upsert: true }
             );
 
-            fetch("https://test-api-a9wn.onrender.com/uploads", {
+            fetch("https://flask-api-91ym.onrender.com/uploads", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
