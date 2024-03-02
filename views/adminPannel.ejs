@@ -440,30 +440,8 @@
         ordrBox.appendChild(ordrDiv);
       }
 
-      // function downloadImage(id, dcname, email) {
-      //   const url = `http://127.0.0.1:5000/download/${id}`;
-      //   fetch(url)
-      //     .then((response) => {
-      //       if (!response.ok) {
-      //         throw new Error(`HTTP error! Status: ${response.status}`);
-      //       }
-      //       console.log(response);
-      //       return response.blob();
-      //     })
-      //     .then((blob) => {
-      //       console.log(blob);
-      //       const link = document.createElement("a");
-      //       link.href = URL.createObjectURL(blob);
-      //       link.download = `${dcname}_${id}.jpg`;
-      //       document.body.appendChild(link);
-      //       link.click();
-      //       document.body.removeChild(link);
-      //     })
-      //     .catch((error) => console.error("Error:", error));
-      // }
-
       function downloadImage(id, dcname, email) {
-        const url = `http://localhost:3030/download/${id}`;
+        const url = `https://chatbot1-0edo.onrender.com/download/${id}`;
         fetch(url)
           .then((response) => {
             if (!response.ok) {
